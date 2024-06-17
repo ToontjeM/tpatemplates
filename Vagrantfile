@@ -25,6 +25,8 @@ Vagrant.configure("2") do |config|
       end
            
       nodes.vm.provision "shell", inline: <<-SHELL
+        sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+        systemctl restart sshd
         systemctl stop firewalld
       SHELL
       
